@@ -1,15 +1,16 @@
 const express = require('express');
 const app = express();
 
-// Log all environment variables at startup
-console.log('Environment Variables:');
+// Store and log all environment variables at startup
+let envVars = 'Environment Variables:\n';
 for (const [key, value] of Object.entries(process.env)) {
+  envVars += `${key}: ${value}\n`;
   console.log(`${key}: ${value}`);
 }
 
-// Define a route to display a message
+// Define a route to display the environment variables
 app.get('/', (req, res) => {
-  res.send('Environment variables listed in console.');
+  res.send(`<pre>${envVars}</pre>`);
 });
 
 // Start the server
